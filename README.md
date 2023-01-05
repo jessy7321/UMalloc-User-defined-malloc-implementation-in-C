@@ -1,5 +1,6 @@
 # UMalloc-User-defined-malloc-implementation-in-C
-
+(This is a part of my coursework (CS518: Operating Systems Design) along with my partner (Victor Sankar Ghosh)
+(Under Prof. John Austen Francesco)<br><br>
 <img width="401" alt="image" src="https://user-images.githubusercontent.com/67055118/210855234-8d9257e9-531f-48a8-807e-1f496a39be9a.png">
 
 **1.0 STRUCTURE OF MEMORY**<br>
