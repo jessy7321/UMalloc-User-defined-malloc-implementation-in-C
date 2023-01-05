@@ -23,15 +23,15 @@ A function to free the blocks of memory allocated. Given a block’s userspace a
 
 **4.0 ERROR DETECTION**<br>
 _**Errors on umalloc()**_<br>
-There are errors on umalloc() for the following cases, where a block is not allocated:
-When checking for a free space:(total_free_space calculates the sum of all the free chunks in the memory)<br>
+There are errors on umalloc() for the following cases, where a block is not allocated:<br>
+_When checking for a free space:(total_free_space calculates the sum of all the free chunks in the memory)_<br>
 A. total_free_space < sizeof(Block)<br>
 In our code, each block requires a minimum of 24bytes for metadata. So for a new allocation, we need at least 24B. If even that is not available, we can say that the memory is full.<br><br>
 B. total_free_space >= requested_size<br>
 There is free memory available. But due to internal fragmentation, there is no ‘one’ block that is large enough to allocate the requested_size.<br><br>
 C. total_free_space < requested_size<br>
 Memory is not full, but not enough to allocate requested_size<br><br>
-When checking for size:<br>
+_When checking for size:<br>_
 If the requested_size is not within the limits of 0 to 10MB, then that size would not make any sense.
 
 _**Errors on ufree()**_<br>
