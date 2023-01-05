@@ -12,7 +12,7 @@ For our implementation, we chose to use a Doubly Linked List. This way, we could
 When umalloc() is called, to allocate a block of data, it traverses through the whole doubly linked list to see if it can find a hole that is large enough to allocate the requested size. This is first-fit approach If found, it will add a “struct Block” node to the first metadata node if it’s the first allocation, or as the next node of those previously allocated. So we have metadata and data, followed by another metadata and data, and so on. Now it is first-fit with segmentation. With the pointer to the userspace it returns, data can be allocated. 
 When ufree() is called, it gets the address to the starting of the block (where the metadata starts), and removes that node. The pointers are updated accordingly. If the freed node was between two nodes, this creates a free space between the two blocks. Later, that hole can be used to umalloc() new node with size less than or equal to that freed node.
 
-**3.0	 Primary Functions**
+**3.0	 Primary Functions**<br>
 **_void * umalloc(size_t size, char * file, int line);_**<br>
 Firstly, initialize the memory the first time umalloc() is called. The variable init, is first set to 0, and then set to 1, when initialize() is called. Each time umalloc() is called, it checks if the memory is initialized. After that, it finds a pointer to a free space that is large enough to fit the requested size by calling find_predecessor_of_next_free(). Then adds a new node to the memory and returns a pointer to the starting address of the user space. In case a free space is not found, it returns NULL. umalloc() also returns NULL is free space not found, as no memory allocated. 
 
@@ -20,7 +20,7 @@ _**void ufree(void * curr_bloc, char * file, int line);**_
 A function to free the blocks of memory allocated. Given a block’s userspace address, determine the starting address of the metadata. Remove that node using remove_node().
 
 
-**4.0 ERROR DETECTION**
+**4.0 ERROR DETECTION**<br>
 _**Errors on umalloc()**_
 There are errors on umalloc() for the following cases, where a block is not allocated:
 	When checking for a free space:
@@ -34,7 +34,7 @@ Memory is not full, but not enough to allocate requested_size
 When checking for size:
 If the requested_size is not within the limits of 0 to 10MB, then that size would not make any sense.
 
-_**Errors on ufree()**_
+_**Errors on ufree()**_<br>
 There are errors on ufree() for the following cases, where a block is not allocated:
 A.	Error occurs when we are looking to remove a node that has never been allocated by umalloc().
 B.	Error occurs when we are looking to free a pointer that has already been freed.
