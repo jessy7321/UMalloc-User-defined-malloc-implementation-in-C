@@ -1,8 +1,8 @@
 # UMalloc-User-defined-malloc-implementation-in-C
 
-**1.0 Structure of Memory**
 <img width="401" alt="image" src="https://user-images.githubusercontent.com/67055118/210855234-8d9257e9-531f-48a8-807e-1f496a39be9a.png">
 
+**1.0 Structure of Memory**
 On initialization, the memory has two nodes to begin with. One at the beginning of the memory, and another at the end of the memory. Both of them are blocks containing only the metadata and no data is allocated. So, their size is 0. They are used as references to the starting and ending of the memory.
 Initially, the first node’s previous pointer is a NULL and the next pointer to the last node. For the last node, the next pointer is NULL and previous pointer is the first node.
 After initialization, the first block actually allocated by umalloc() will follow the first node and the pointers are updated accordingly. Those blocks will have a non-zero data size.
@@ -13,7 +13,7 @@ When umalloc() is called, to allocate a block of data, it traverses through the 
 When ufree() is called, it gets the address to the starting of the block (where the metadata starts), and removes that node. The pointers are updated accordingly. If the freed node was between two nodes, this creates a free space between the two blocks. Later, that hole can be used to umalloc() new node with size less than or equal to that freed node.
 
 **3.0	 Primary Functions**
-**_void * umalloc(size_t size, char * file, int line);_**
+**_void * umalloc(size_t size, char * file, int line);_**<br>
 Firstly, initialize the memory the first time umalloc() is called. The variable init, is first set to 0, and then set to 1, when initialize() is called. Each time umalloc() is called, it checks if the memory is initialized. After that, it finds a pointer to a free space that is large enough to fit the requested size by calling find_predecessor_of_next_free(). Then adds a new node to the memory and returns a pointer to the starting address of the user space. In case a free space is not found, it returns NULL. umalloc() also returns NULL is free space not found, as no memory allocated. 
 
 _**void ufree(void * curr_bloc, char * file, int line);**_
