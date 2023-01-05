@@ -40,6 +40,6 @@ A.	Error occurs when we are looking to remove a node that has never been allocat
 B.	Error occurs when we are looking to free a pointer that has already been freed.
 
 **5.0 TESTING INSTRUCTIONS**<br>
-make clean
-make all
-./memgrind
+make clean<br>
+make all<br>
+./memgrind<br>
